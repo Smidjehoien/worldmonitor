@@ -194,7 +194,14 @@
     "panelCatCentralBanks": "Central Banks & Econ",
     "panelCatDeals": "Deals & Institutional",
     "panelCatGulfMena": "Gulf & MENA",
-    "panelCatTradePolicy": "Trade Policy"
+    "panelCatTradePolicy": "Trade Policy",
+    "panelCatDtoIntelligence": "Market Intelligence",
+    "panelCatDtoOperations": "Operations & Compliance",
+    "panelCatEnterpriseOps": "Manufacturing & Logistics",
+    "panelCatEnterpriseRisk": "Risk & Compliance",
+    "panelCatAiResearch": "AI Research & Industry",
+    "panelCatAiRegulation": "AI Regulation",
+    "panelCatAiStartups": "AI Startups & Markets"
   },
   "panels": {
     "liveNews": "Live News",

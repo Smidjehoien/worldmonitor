@@ -274,6 +274,94 @@ export const VARIANT_FEEDS: Record<string, Record<string, ServerFeed[]>> = {
       { name: 'Singularity Hub', url: 'https://singularityhub.com/feed/' },
     ],
   },
+  dto: {
+    market_intelligence: [
+      { name: 'DigiTimes', url: gn('site:digitimes.com EMS OR ODM OR semiconductor when:3d') },
+      { name: 'EMSNow', url: gn('site:emsnow.com when:7d') },
+      { name: 'EMS Industry', url: gn('"EMS" OR "ODM" OR "contract manufacturing" electronics when:3d') },
+    ],
+    competitor_watch: [
+      { name: 'Foxconn', url: gn('Foxconn OR "Hon Hai" when:3d') },
+      { name: 'Pegatron', url: gn('Pegatron when:7d') },
+      { name: 'Compal', url: gn('Compal Electronics when:7d') },
+    ],
+    tech_trends: [
+      { name: 'TechCrunch', url: 'https://techcrunch.com/feed/' },
+      { name: 'MIT Tech Review', url: 'https://www.technologyreview.com/feed/' },
+      { name: 'VentureBeat AI', url: 'https://venturebeat.com/category/ai/feed/' },
+    ],
+    regional_news: [
+      { name: 'Taiwan Business', url: gn('Taiwan business OR technology when:2d') },
+      { name: 'China Manufacturing', url: gn('China manufacturing OR "supply chain" when:2d') },
+    ],
+    regulation: [
+      { name: 'AI Regulation', url: gn('AI regulation OR "artificial intelligence" law when:7d') },
+      { name: 'EU AI Act', url: gn('"EU AI Act" regulation when:7d') },
+    ],
+    supply_chain: [
+      { name: 'FreightWaves', url: 'https://www.freightwaves.com/feed' },
+      { name: 'Supply Chain', url: gn('"supply chain" disruption OR logistics when:2d') },
+    ],
+    economic: [
+      { name: 'Economic Data', url: gn('CPI OR inflation OR GDP OR PMI when:2d') },
+      { name: 'CNBC', url: 'https://www.cnbc.com/id/100003114/device/rss/rss.html' },
+    ],
+  },
+  enterprise: {
+    operations: [
+      { name: 'Manufacturing News', url: gn('manufacturing operations OR "factory automation" when:3d') },
+      { name: 'EMS/ODM Ops', url: gn('"EMS" OR "ODM" OR "contract manufacturing" operations when:3d') },
+    ],
+    economic: [
+      { name: 'Economic Data', url: gn('CPI OR inflation OR GDP OR PMI when:2d') },
+      { name: 'CNBC', url: 'https://www.cnbc.com/id/100003114/device/rss/rss.html' },
+    ],
+    logistics: [
+      { name: 'FreightWaves', url: 'https://www.freightwaves.com/feed' },
+      { name: 'Supply Chain', url: gn('container shipping OR "freight rates" OR logistics when:3d') },
+    ],
+    risk: [
+      { name: 'Geopolitical Risk', url: gn('"geopolitical risk" OR "supply chain risk" OR "business continuity" when:3d') },
+      { name: 'Sanctions Watch', url: gn('sanctions OR "export control" OR "trade restriction" when:3d') },
+    ],
+    compliance: [
+      { name: 'ESG Compliance', url: gn('ESG OR "sustainability reporting" manufacturing when:7d') },
+      { name: 'Data Protection', url: gn('GDPR OR PIPL OR "data protection" enforcement when:7d') },
+    ],
+    cn_ops: [
+      { name: 'Dongguan', url: gn('Dongguan manufacturing OR Guangdong industry when:7d') },
+      { name: 'Suzhou', url: gn('Suzhou manufacturing OR industry when:7d') },
+    ],
+  },
+  aitrend: {
+    ai_research: [
+      { name: 'MIT Research', url: 'https://news.mit.edu/rss/research' },
+      { name: 'Stanford HAI', url: gn('site:hai.stanford.edu when:14d') },
+      { name: 'DeepMind', url: gn('DeepMind research when:7d') },
+    ],
+    ai_industry: [
+      { name: 'VentureBeat AI', url: 'https://venturebeat.com/category/ai/feed/' },
+      { name: 'OpenAI News', url: gn('OpenAI ChatGPT GPT when:3d') },
+      { name: 'Anthropic News', url: gn('Anthropic Claude when:7d') },
+      { name: 'AI Enterprise', url: gn('"enterprise AI" OR "AI adoption" OR "AI transformation" when:3d') },
+    ],
+    ai_regulation: [
+      { name: 'EU AI Act', url: gn('"EU AI Act" regulation when:7d') },
+      { name: 'AI Governance', url: gn('"AI governance" OR "AI regulation" OR "AI safety" policy when:7d') },
+    ],
+    ai_startups: [
+      { name: 'AI Startup Funding', url: gn('"AI startup" OR "AI company" funding OR raised when:3d') },
+      { name: 'TechCrunch AI', url: 'https://techcrunch.com/category/artificial-intelligence/feed/' },
+    ],
+    enterprise_ai: [
+      { name: 'HBR AI', url: gn('site:hbr.org artificial intelligence when:14d') },
+      { name: 'Gartner AI', url: gn('Gartner AI OR "artificial intelligence" when:7d') },
+    ],
+    hardware: [
+      { name: 'GPU & AI Chips', url: gn('NVIDIA OR AMD OR Intel AI chip OR GPU when:3d') },
+      { name: 'SemiAnalysis', url: 'https://www.semianalysis.com/feed' },
+    ],
+  },
 };
 
 export const INTEL_SOURCES: ServerFeed[] = [

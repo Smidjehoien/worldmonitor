@@ -578,11 +578,275 @@ const HAPPY_MOBILE_MAP_LAYERS: MapLayers = {
 };
 
 // ============================================
+// DTO VARIANT (Primax Market Intelligence)
+// ============================================
+const DTO_PANELS: Record<string, PanelConfig> = {
+  map: { name: 'Intelligence Map', enabled: true, priority: 1 },
+  'live-news': { name: 'Market Intel Feed', enabled: true, priority: 1 },
+  insights: { name: 'AI Insights', enabled: true, priority: 1 },
+  market_intelligence: { name: 'EMS/ODM Industry', enabled: true, priority: 1 },
+  competitor_watch: { name: 'Competitor Watch', enabled: true, priority: 1 },
+  tech_trends: { name: 'Tech Trends', enabled: true, priority: 1 },
+  regional_news: { name: 'Regional Intel', enabled: true, priority: 1 },
+  regulation: { name: 'Regulation Tracker', enabled: true, priority: 1 },
+  'supply-chain': { name: 'Supply Chain Monitor', enabled: true, priority: 1 },
+  supply_chain: { name: 'Supply Chain News', enabled: true, priority: 1 },
+  economic: { name: 'Economic Indicators', enabled: true, priority: 1 },
+  'trade-policy': { name: 'Trade Policy', enabled: true, priority: 1 },
+  markets: { name: 'Markets', enabled: true, priority: 2 },
+  commodities: { name: 'Commodities', enabled: true, priority: 2 },
+  'macro-signals': { name: 'Market Radar', enabled: true, priority: 2 },
+  monitors: { name: 'My Monitors', enabled: true, priority: 2 },
+  'world-clock': { name: 'World Clock', enabled: true, priority: 2 },
+};
+
+const DTO_MAP_LAYERS: MapLayers = {
+  tradeRoutes: true,
+  cables: true,
+  pipelines: true,
+  sanctions: true,
+  economic: true,
+  outages: true,
+  weather: true,
+  natural: true,
+  datacenters: true,
+  iranAttacks: false,
+  gpsJamming: false,
+  geopoliticalBoundaries: false,
+  conflicts: false,
+  bases: false,
+  hotspots: false,
+  ais: false,
+  nuclear: false,
+  irradiators: false,
+  cyberThreats: false,
+  protests: false,
+  flights: false,
+  military: false,
+  spaceports: false,
+  minerals: false,
+  fires: false,
+  ucdpEvents: false,
+  displacement: false,
+  climate: false,
+  waterways: false,
+  startupHubs: false,
+  cloudRegions: false,
+  accelerators: false,
+  techHQs: false,
+  techEvents: false,
+  stockExchanges: false,
+  financialCenters: false,
+  centralBanks: false,
+  commodityHubs: false,
+  gulfInvestments: false,
+  positiveEvents: false,
+  kindness: false,
+  happiness: false,
+  speciesRecovery: false,
+  renewableInstallations: false,
+  ciiChoropleth: false,
+  dayNight: false,
+};
+
+const DTO_MOBILE_MAP_LAYERS: MapLayers = {
+  ...DTO_MAP_LAYERS,
+  tradeRoutes: false,
+  cables: false,
+  pipelines: false,
+  weather: false,
+  datacenters: false,
+};
+
+// ============================================
+// ENTERPRISE VARIANT (Primax Operations)
+// ============================================
+const ENTERPRISE_PANELS: Record<string, PanelConfig> = {
+  map: { name: 'Operations Map', enabled: true, priority: 1 },
+  'live-news': { name: 'Operations Feed', enabled: true, priority: 1 },
+  insights: { name: 'AI Insights', enabled: true, priority: 1 },
+  'supply-chain': { name: 'Supply Chain Monitor', enabled: true, priority: 1 },
+  economic: { name: 'Economic Indicators', enabled: true, priority: 1 },
+  'trade-policy': { name: 'Trade Policy', enabled: true, priority: 1 },
+  operations: { name: 'Manufacturing Ops', enabled: true, priority: 1 },
+  logistics: { name: 'Logistics', enabled: true, priority: 1 },
+  risk: { name: 'Risk Dashboard', enabled: true, priority: 1 },
+  compliance: { name: 'Compliance', enabled: true, priority: 1 },
+  cn_ops: { name: 'China Operations', enabled: true, priority: 1 },
+  commodities: { name: 'Commodities', enabled: true, priority: 2 },
+  markets: { name: 'Markets', enabled: true, priority: 2 },
+  monitors: { name: 'My Monitors', enabled: true, priority: 2 },
+  'world-clock': { name: 'World Clock', enabled: true, priority: 2 },
+};
+
+const ENTERPRISE_MAP_LAYERS: MapLayers = {
+  weather: true,
+  economic: true,
+  sanctions: true,
+  outages: true,
+  tradeRoutes: true,
+  natural: true,
+  cables: true,
+  pipelines: true,
+  waterways: true,
+  iranAttacks: false,
+  gpsJamming: false,
+  geopoliticalBoundaries: false,
+  conflicts: false,
+  bases: false,
+  hotspots: false,
+  ais: false,
+  nuclear: false,
+  irradiators: false,
+  cyberThreats: false,
+  datacenters: false,
+  protests: false,
+  flights: false,
+  military: false,
+  spaceports: false,
+  minerals: false,
+  fires: false,
+  ucdpEvents: false,
+  displacement: false,
+  climate: false,
+  startupHubs: false,
+  cloudRegions: false,
+  accelerators: false,
+  techHQs: false,
+  techEvents: false,
+  stockExchanges: false,
+  financialCenters: false,
+  centralBanks: false,
+  commodityHubs: false,
+  gulfInvestments: false,
+  positiveEvents: false,
+  kindness: false,
+  happiness: false,
+  speciesRecovery: false,
+  renewableInstallations: false,
+  ciiChoropleth: false,
+  dayNight: false,
+};
+
+const ENTERPRISE_MOBILE_MAP_LAYERS: MapLayers = {
+  ...ENTERPRISE_MAP_LAYERS,
+  tradeRoutes: false,
+  cables: false,
+  pipelines: false,
+  waterways: false,
+  sanctions: false,
+};
+
+// ============================================
+// AITREND VARIANT (AI Technology Radar)
+// ============================================
+const AITREND_PANELS: Record<string, PanelConfig> = {
+  map: { name: 'AI Trend Map', enabled: true, priority: 1 },
+  'live-news': { name: 'AI Intel Feed', enabled: true, priority: 1 },
+  insights: { name: 'AI Insights', enabled: true, priority: 1 },
+  ai_research: { name: 'AI Research', enabled: true, priority: 1 },
+  ai_industry: { name: 'AI Industry', enabled: true, priority: 1 },
+  ai_regulation: { name: 'AI Regulation', enabled: true, priority: 1 },
+  ai_startups: { name: 'AI Startups', enabled: true, priority: 1 },
+  enterprise_ai: { name: 'Enterprise AI', enabled: true, priority: 1 },
+  hardware: { name: 'AI Hardware', enabled: true, priority: 1 },
+  regulation: { name: 'AI Regulation Dashboard', enabled: true, priority: 1 },
+  'tech-readiness': { name: 'Tech Readiness Index', enabled: true, priority: 1 },
+  github: { name: 'GitHub Trending', enabled: true, priority: 2 },
+  markets: { name: 'AI Stocks', enabled: true, priority: 2 },
+  monitors: { name: 'My Monitors', enabled: true, priority: 2 },
+  'world-clock': { name: 'World Clock', enabled: true, priority: 2 },
+};
+
+const AITREND_MAP_LAYERS: MapLayers = {
+  datacenters: true,
+  cables: true,
+  outages: true,
+  natural: true,
+  startupHubs: true,
+  techHQs: true,
+  techEvents: true,
+  cloudRegions: false,
+  accelerators: false,
+  iranAttacks: false,
+  gpsJamming: false,
+  geopoliticalBoundaries: false,
+  conflicts: false,
+  bases: false,
+  hotspots: false,
+  ais: false,
+  nuclear: false,
+  irradiators: false,
+  sanctions: false,
+  weather: false,
+  economic: false,
+  waterways: false,
+  cyberThreats: false,
+  protests: false,
+  flights: false,
+  military: false,
+  spaceports: false,
+  minerals: false,
+  fires: false,
+  ucdpEvents: false,
+  displacement: false,
+  climate: false,
+  pipelines: false,
+  tradeRoutes: false,
+  stockExchanges: false,
+  financialCenters: false,
+  centralBanks: false,
+  commodityHubs: false,
+  gulfInvestments: false,
+  positiveEvents: false,
+  kindness: false,
+  happiness: false,
+  speciesRecovery: false,
+  renewableInstallations: false,
+  ciiChoropleth: false,
+  dayNight: false,
+};
+
+const AITREND_MOBILE_MAP_LAYERS: MapLayers = {
+  ...AITREND_MAP_LAYERS,
+  cables: false,
+  techHQs: false,
+};
+
+// ============================================
 // VARIANT-AWARE EXPORTS
 // ============================================
-export const DEFAULT_PANELS = SITE_VARIANT === 'happy' ? HAPPY_PANELS : SITE_VARIANT === 'tech' ? TECH_PANELS : SITE_VARIANT === 'finance' ? FINANCE_PANELS : FULL_PANELS;
-export const DEFAULT_MAP_LAYERS = SITE_VARIANT === 'happy' ? HAPPY_MAP_LAYERS : SITE_VARIANT === 'tech' ? TECH_MAP_LAYERS : SITE_VARIANT === 'finance' ? FINANCE_MAP_LAYERS : FULL_MAP_LAYERS;
-export const MOBILE_DEFAULT_MAP_LAYERS = SITE_VARIANT === 'happy' ? HAPPY_MOBILE_MAP_LAYERS : SITE_VARIANT === 'tech' ? TECH_MOBILE_MAP_LAYERS : SITE_VARIANT === 'finance' ? FINANCE_MOBILE_MAP_LAYERS : FULL_MOBILE_MAP_LAYERS;
+const PANELS_MAP: Record<string, Record<string, PanelConfig>> = {
+  full: FULL_PANELS,
+  tech: TECH_PANELS,
+  finance: FINANCE_PANELS,
+  happy: HAPPY_PANELS,
+  dto: DTO_PANELS,
+  enterprise: ENTERPRISE_PANELS,
+  aitrend: AITREND_PANELS,
+};
+const LAYERS_MAP: Record<string, MapLayers> = {
+  full: FULL_MAP_LAYERS,
+  tech: TECH_MAP_LAYERS,
+  finance: FINANCE_MAP_LAYERS,
+  happy: HAPPY_MAP_LAYERS,
+  dto: DTO_MAP_LAYERS,
+  enterprise: ENTERPRISE_MAP_LAYERS,
+  aitrend: AITREND_MAP_LAYERS,
+};
+const MOBILE_LAYERS_MAP: Record<string, MapLayers> = {
+  full: FULL_MOBILE_MAP_LAYERS,
+  tech: TECH_MOBILE_MAP_LAYERS,
+  finance: FINANCE_MOBILE_MAP_LAYERS,
+  happy: HAPPY_MOBILE_MAP_LAYERS,
+  dto: DTO_MOBILE_MAP_LAYERS,
+  enterprise: ENTERPRISE_MOBILE_MAP_LAYERS,
+  aitrend: AITREND_MOBILE_MAP_LAYERS,
+};
+
+export const DEFAULT_PANELS = PANELS_MAP[SITE_VARIANT] ?? FULL_PANELS;
+export const DEFAULT_MAP_LAYERS = LAYERS_MAP[SITE_VARIANT] ?? FULL_MAP_LAYERS;
+export const MOBILE_DEFAULT_MAP_LAYERS = MOBILE_LAYERS_MAP[SITE_VARIANT] ?? FULL_MOBILE_MAP_LAYERS;
 
 /** Maps map-layer toggle keys to their data-freshness source IDs (single source of truth). */
 export const LAYER_TO_SOURCE: Partial<Record<keyof MapLayers, DataSourceId[]>> = {
@@ -696,6 +960,57 @@ export const PANEL_CATEGORY_MAP: Record<string, { labelKey: string; panelKeys: s
     labelKey: 'header.panelCatGulfMena',
     panelKeys: ['gulf-economies', 'gcc-investments', 'gccNews', 'monitors', 'world-clock'],
     variants: ['finance'],
+  },
+
+  // DTO variant
+  dtoIntelligence: {
+    labelKey: 'header.panelCatDtoIntelligence',
+    panelKeys: ['market_intelligence', 'competitor_watch', 'tech_trends', 'regional_news'],
+    variants: ['dto'],
+  },
+  dtoOperations: {
+    labelKey: 'header.panelCatDtoOperations',
+    panelKeys: ['supply-chain', 'supply_chain', 'economic', 'trade-policy', 'regulation'],
+    variants: ['dto'],
+  },
+  dtoMarkets: {
+    labelKey: 'header.panelCatMarkets',
+    panelKeys: ['markets', 'commodities', 'macro-signals', 'monitors', 'world-clock'],
+    variants: ['dto'],
+  },
+
+  // Enterprise variant
+  enterpriseOps: {
+    labelKey: 'header.panelCatEnterpriseOps',
+    panelKeys: ['operations', 'logistics', 'supply-chain', 'cn_ops'],
+    variants: ['enterprise'],
+  },
+  enterpriseRisk: {
+    labelKey: 'header.panelCatEnterpriseRisk',
+    panelKeys: ['risk', 'compliance', 'economic', 'trade-policy'],
+    variants: ['enterprise'],
+  },
+  enterpriseMarkets: {
+    labelKey: 'header.panelCatMarkets',
+    panelKeys: ['commodities', 'markets', 'monitors', 'world-clock'],
+    variants: ['enterprise'],
+  },
+
+  // AI Trend variant
+  aitrendResearch: {
+    labelKey: 'header.panelCatAiResearch',
+    panelKeys: ['ai_research', 'ai_industry', 'enterprise_ai', 'hardware', 'github'],
+    variants: ['aitrend'],
+  },
+  aitrendRegulation: {
+    labelKey: 'header.panelCatAiRegulation',
+    panelKeys: ['ai_regulation', 'regulation', 'tech-readiness'],
+    variants: ['aitrend'],
+  },
+  aitrendStartups: {
+    labelKey: 'header.panelCatAiStartups',
+    panelKeys: ['ai_startups', 'markets', 'monitors', 'world-clock'],
+    variants: ['aitrend'],
   },
 };
 

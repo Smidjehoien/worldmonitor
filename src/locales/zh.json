@@ -143,7 +143,14 @@
     "panelCatCentralBanks": "央行与经济",
     "panelCatDeals": "交易与机构",
     "panelCatGulfMena": "海湾与中东",
-    "panelCatTradePolicy": "贸易政策"
+    "panelCatTradePolicy": "贸易政策",
+    "panelCatDtoIntelligence": "市场情报",
+    "panelCatDtoOperations": "营运与合规",
+    "panelCatEnterpriseOps": "制造与物流",
+    "panelCatEnterpriseRisk": "风险与合规",
+    "panelCatAiResearch": "AI 研究与产业",
+    "panelCatAiRegulation": "AI 法规",
+    "panelCatAiStartups": "AI 创业与市场"
   },
   "panels": {
     "liveNews": "实时新闻",

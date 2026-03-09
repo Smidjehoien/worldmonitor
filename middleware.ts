@@ -15,6 +15,9 @@ const VARIANT_HOST_MAP: Record<string, string> = {
   'tech.worldmonitor.app': 'tech',
   'finance.worldmonitor.app': 'finance',
   'happy.worldmonitor.app': 'happy',
+  'dto.worldmonitor.app': 'dto',
+  'enterprise.worldmonitor.app': 'enterprise',
+  'aitrend.worldmonitor.app': 'aitrend',
 };
 
 // Source of truth: src/config/variant-meta.ts — keep in sync when variant metadata changes.
@@ -36,6 +39,24 @@ const VARIANT_OG: Record<string, { title: string; description: string; image: st
     description: 'Curated positive news, progress data, and uplifting stories from around the world.',
     image: 'https://happy.worldmonitor.app/favico/happy/og-image.png',
     url: 'https://happy.worldmonitor.app/',
+  },
+  dto: {
+    title: 'Primax DTO Intelligence - Market Intelligence Dashboard',
+    description: 'Primax DTO market intelligence dashboard tracking EMS/ODM industry, competitor watch, technology trends, supply chain, and regulatory compliance.',
+    image: 'https://dto.worldmonitor.app/favico/dto/og-image.png',
+    url: 'https://dto.worldmonitor.app/',
+  },
+  enterprise: {
+    title: 'Primax Operations Monitor - Global Operations Dashboard',
+    description: 'Primax enterprise operations monitor tracking manufacturing sites, supply chain logistics, risk management, and compliance across global facilities.',
+    image: 'https://enterprise.worldmonitor.app/favico/enterprise/og-image.png',
+    url: 'https://enterprise.worldmonitor.app/',
+  },
+  aitrend: {
+    title: 'AI Trend Radar - Global AI Technology & Regulation Tracker',
+    description: 'AI technology trend radar tracking research papers, industry developments, AI regulation, startup funding, enterprise adoption, and AI infrastructure.',
+    image: 'https://aitrend.worldmonitor.app/favico/aitrend/og-image.png',
+    url: 'https://aitrend.worldmonitor.app/',
   },
 };
 

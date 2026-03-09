@@ -67,11 +67,17 @@ function htmlVariantPlugin(): Plugin {
         .replace(/"description": "Real-time global intelligence dashboard with live news, markets, military tracking, infrastructure monitoring, and geopolitical data."/, `"description": "${activeMeta.description}"`)
         .replace(/"featureList": \[[\s\S]*?\]/, `"featureList": ${JSON.stringify(activeMeta.features, null, 8).replace(/\n/g, '\n      ')}`);
 
-      // Theme-color meta — warm cream for happy variant
-      if (activeVariant === 'happy') {
+      // Theme-color meta — variant-specific brand colors
+      const variantThemeColors: Record<string, string> = {
+        happy: '#FAFAF5',       // warm cream
+        dto: '#003B7A',         // Primax corporate blue
+        enterprise: '#1A1A2E', // dark operations theme
+        aitrend: '#2D1B69',    // tech purple/indigo
+      };
+      if (variantThemeColors[activeVariant]) {
         result = result.replace(
           /<meta name="theme-color" content=".*?" \/>/,
-          '<meta name="theme-color" content="#FAFAF5" />'
+          `<meta name="theme-color" content="${variantThemeColors[activeVariant]}" />`
         );
       }
 
@@ -575,12 +581,126 @@ function youtubeLivePlugin(): Plugin {
   };
 }
 
+// DTO Intelligence data bridge — serves glen-cortex-data KB as JSON API (dev only)
+function dtoDataBridgePlugin(): Plugin {
+  const DATA_REPO = resolve(process.env.HOME || process.env.USERPROFILE || '.', 'Projects/glen-cortex-data');
+
+  return {
+    name: 'dto-data-bridge',
+    apply: 'serve', // dev server only
+    configureServer(server) {
+      // GET /api/dto/v1/intelligence — KB raw_intelligence items
+      server.middlewares.use('/api/dto/v1/intelligence', async (_req, res) => {
+        try {
+          const raw = await readFile(resolve(DATA_REPO, 'data/knowledge_base.json'), 'utf-8');
+          const kb = JSON.parse(raw);
+          const rawIntel = kb.raw_intelligence || [];
+          const items = rawIntel.map((e: Record<string, unknown>) => ({
+            id: e.id || '',
+            title: e.headline || '',
+            summary: e.key_data || e.raw_excerpt || '',
+            category: e.category || 'uncategorized',
+            source: e.source_name || '',
+            url: e.source_url || '',
+            date: e.date || '',
+            tags: [e.sub_category, e.data_type].filter(Boolean),
+            scan_mode: e.scan_mode || null,
+            signal_strength: e.signal_worthy ? 8 : 5,
+            geo: null,
+          }));
+          const insights = (kb.processed_insights || []).map((e: Record<string, unknown>) => ({
+            id: e.id || '',
+            title: e.theme || '',
+            analysis: e.insight || '',
+            category: e.theme || '',
+            date: e.week || '',
+            source_refs: e.supporting_raw_intelligence_ids || [],
+            signal_strength: e.confidence === 'high' ? 9 : e.confidence === 'medium' ? 6 : 4,
+          }));
+          res.setHeader('Content-Type', 'application/json');
+          res.setHeader('Cache-Control', 'no-cache');
+          res.end(JSON.stringify({
+            items,
+            insights,
+            lastUpdated: kb.last_updated || new Date().toISOString(),
+            totalCount: items.length,
+          }));
+        } catch (err) {
+          res.statusCode = 404;
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({ error: 'KB not found', path: resolve(DATA_REPO, 'data/knowledge_base.json') }));
+        }
+      });
+
+      // GET /api/dto/v1/insights — processed insights only
+      server.middlewares.use('/api/dto/v1/insights', async (_req, res) => {
+        try {
+          const raw = await readFile(resolve(DATA_REPO, 'data/knowledge_base.json'), 'utf-8');
+          const kb = JSON.parse(raw);
+          const insights = (kb.processed_insights || []).map((e: Record<string, unknown>) => ({
+            id: e.id || '',
+            title: e.theme || '',
+            analysis: e.insight || '',
+            category: e.theme || '',
+            date: e.week || '',
+            source_refs: e.supporting_raw_intelligence_ids || [],
+            signal_strength: e.confidence === 'high' ? 9 : e.confidence === 'medium' ? 6 : 4,
+          }));
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({ insights }));
+        } catch {
+          res.statusCode = 404;
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({ insights: [] }));
+        }
+      });
+
+      // GET /api/dto/v1/actions — action items with completion tracking
+      server.middlewares.use('/api/dto/v1/actions', async (_req, res) => {
+        try {
+          const raw = await readFile(resolve(DATA_REPO, 'data/action_items.json'), 'utf-8');
+          const data = JSON.parse(raw);
+          const rawItems = data.action_items || data.items || [];
+          const items = rawItems.map((a: Record<string, unknown>) => ({
+            id: a.action_id || a.id || '',
+            title: a.subject || a.title || '',
+            priority: a.priority || 'P2',
+            status: a.status || 'open',
+            owner: a.owner || '',
+            deadline: a.deadline || '',
+            source: a.source || '',
+            description: a.description || '',
+            risk_score: a.risk_score || 0,
+          }));
+          const doneCount = items.filter((a: Record<string, unknown>) => a.status === 'done').length;
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({
+            items,
+            completionRate: items.length > 0 ? Math.round((doneCount / items.length) * 100) : 0,
+            overdueCount: items.filter((a: Record<string, unknown>) => {
+              if (a.status === 'done') return false;
+              if (!a.deadline) return false;
+              return new Date(a.deadline as string) < new Date();
+            }).length,
+            lastUpdated: new Date().toISOString(),
+          }));
+        } catch {
+          res.statusCode = 404;
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({ items: [], completionRate: 0, overdueCount: 0, lastUpdated: new Date().toISOString() }));
+        }
+      });
+    },
+  };
+}
+
 export default defineConfig({
   define: {
     __APP_VERSION__: JSON.stringify(pkg.version),
   },
   plugins: [
     htmlVariantPlugin(),
+    dtoDataBridgePlugin(),
     polymarketPlugin(),
     rssProxyPlugin(),
     youtubeLivePlugin(),
